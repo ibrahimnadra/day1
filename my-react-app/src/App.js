@@ -5,8 +5,11 @@ function App() {
   const apiKey = "12345-FAKE-SECRET-KEY";
   const password = "SuperSecret123!";
   const token = "ghp_FAKEGITHUBTOKEN123456";
-  const AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE";
-  const AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+  const AWS_SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+  const DB_PASSWORD = "SuperSecurePassword123!";
+  const GITHUB_TOKEN = "ghp_1234567890EXAMPLETOKEN";
+  const SECRET_KEY = "mySuperSecretKey123!";
+
 
   return (
     <div style={{ padding: '20px' }}>
