@@ -21,52 +21,46 @@ Demonstrate understanding of shift-left security principles by scanning code for
   docker run --rm -v $(pwd)/.gitleaks.toml:/gitleaks.toml -v $(pwd):/code zricethezav/gitleaks:latest
   ```
 - Verified that Gitleaks detected the hardcoded secrets.
-  ![Gitleak Run on Local](screenshots/local_gitleak_run.png)
+  ![Failed Gitleak Run on Local](screenshots/failed_local_gitleak_run.png)
 
 ### 4. Created a Dockerfile to containerize the React app
 
-### 4. Set up Gitleaks in a Pipeline
+### 5. Set up Gitleaks in a Pipeline
 - Added a GitHub Actions workflow under `.github/workflows/react-devsecops.yml` with multiple stages.
 - Integrated **Gitleaks** (`zricethezav/gitleaks-action@v2`) to scan the repo for hardcoded secrets.
 - Configured it to generate a report (`gitleaks-report.json`) and upload it as an artifact.
   ![Failed Gitleak Run On Pipeline](screenshots/failed_pipeline_gitleak_run.png)
 
-### 5. Install `git-filter-repo`
+### 6. Install `git-filter-repo`
 - Installed using apt package manager:
   ```bash
   sudo apt install git-filter-repo
   ```
   ![Install Git Filter Repo](screenshots/install_git_filter_repo.png)
 
-### 3. Identify and Remove Detected Secrets
+### 7. Identify and Remove Detected Secrets
 - Removed the secret from the codebase (App.js).
 - Removed the secret from the Git history using:
   ```bash
-  git filter-repo --replace-text <(echo "XXX==>XXX")
+  git filter-repo --replace-text <(echo "KEY==>XXX")
   ```
+- Add the origin again.
 - Committed and pushed the changes to GitHub.
   ![Ran Git Filter](screenshots/run_git_filter.png)
 
-### 4. Re-run Gitleaks
-- Re-scanned the repository , 
+### 8. Re-run Gitleaks
+- Re-scanned the repository
+ ![Success Gitleak Run on Local](success_local_gitleak_run.png)
+- Re-ran the GitHub Actions pipeline to confirm no secrets are detected.
+ ![Success Gitleak Run on Pipeline](screenshots/success_pipeline_gitleak_run.png)
 
-- Verified that the Gitleaks report was clean.
-
-### 5. Deploy Application Securely
+### 9. Deploy Application Securely
 - Wrote a `Dockerfile` to containerize the React application.
 - Extended the GitHub Actions pipeline with four stages:
   1. **Build**: Install dependencies and build the React app.
   2. **Test**: Placeholder test (echo statement).
   3. **Security**: Run Gitleaks and upload the scan report.
   4. **Deploy**: Build and run the Docker container.
-
----
-
-## Pipeline Workflow
-The CI/CD pipeline ensures:
-- Early detection of secrets before they reach production.
-- Automated build and deployment of the application inside Docker.
-- Artifacts for audit purposes (Gitleaks report).
 
 ---
 

@@ -13,6 +13,8 @@ jobs:
       # Stage 1: Build
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +40,7 @@ jobs:
         uses: zricethezav/gitleaks-action@v2
         with:
           version: v8.18.4
-          args: detect --source . --report-path gitleaks-report.json --exit-code 1
+          args: detect --source . --report-format=json --report-path=gitleaks-report.json --exit-code 1
 
       - name: Upload Gitleaks Report
         if: always()
