@@ -1,0 +1,49 @@
+name: React DevSecOps Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Stage 1: Build
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build App
+        run: npm run build
+
+      # Stage 2: Test (placeholder)
+      - name: Test Placeholder
+        run: echo "No tests defined yet."
+
+      # Stage 3: Security (Gitleaks) + Report
+      - name: Run Gitleaks
+        uses: zricethezav/gitleaks-action@v2
+        with:
+          args: detect --source=. --report-path=gitleaks-report.json --exit-on-find
+
+      - name: Upload Gitleaks Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+
+      # Stage 4: Deploy
+      - name: Build Docker Image
+        run: docker build -t my-react-app .
+
+      - name: Run Docker Container
+        run: docker run -d -p 3000:80 my-react-app
