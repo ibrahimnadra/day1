@@ -23,8 +23,10 @@ Demonstrate understanding of shift-left security principles by scanning code for
 - Verified that Gitleaks detected the hardcoded secrets.
   ![Gitleak Run on Local](screenshots/local_gitleak_run.png)
 
+### 4. Created a Dockerfile to containerize the React app
+
 ### 4. Set up Gitleaks in a Pipeline
-- Added a GitHub Actions workflow under `.github/workflows/react-devsecops.yml`.
+- Added a GitHub Actions workflow under `.github/workflows/react-devsecops.yml` with multiple stages.
 - Integrated **Gitleaks** (`zricethezav/gitleaks-action@v2`) to scan the repo for hardcoded secrets.
 - Configured it to generate a report (`gitleaks-report.json`) and upload it as an artifact.
   ![Failed Gitleak Run On Pipeline](screenshots/failed_pipeline_gitleak_run.png)
@@ -46,7 +48,8 @@ Demonstrate understanding of shift-left security principles by scanning code for
   ![Ran Git Filter](screenshots/run_git_filter.png)
 
 ### 4. Re-run Gitleaks
-- Re-scanned the repository to ensure no further secrets were detected.
+- Re-scanned the repository , 
+
 - Verified that the Gitleaks report was clean.
 
 ### 5. Deploy Application Securely
