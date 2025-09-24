@@ -1,12 +1,14 @@
-# Stage 1: Build
 FROM node:20-alpine AS build
+
+RUN mkdir -p /app
 WORKDIR /app
-COPY package*.json ./
+
+COPY my-react-app/package*.json /app/
 RUN npm install
-COPY . .
+
+COPY my-react-app/ /app/
 RUN npm run build
 
-# Stage 2: Serve
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80

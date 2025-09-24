@@ -44,8 +44,6 @@ jobs:
         with:
           name: gitleaks-report
           path: gitleaks-report.json
-        
-        
 
       # Stage 4: Deploy Docker
       - name: Build Docker Image
