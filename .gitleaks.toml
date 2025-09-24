@@ -3,37 +3,7 @@ title = "Custom Gitleaks config"
 useDefault = true
 
 [[rules]]
-id = "test-aws-access-key"
-description = "Detect fake AWS Access Key example"
-regex = '''AKIAIOSFODNN7EXAMPLE'''
-secretGroup = 0
-entropy = 0.0
-keywords = ["AWS_ACCESS_KEY_ID"]
-tags = ["test","aws"]
-
-[[rules]]
-id = "test-aws-secret-key"
-description = "Detect fake AWS Secret Key example"
-regex = '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'''
-secretGroup = 0
-entropy = 0.0
-keywords = ["AWS_SECRET_ACCESS_KEY"]
-tags = ["test","aws"]
-
-[[rules]]
-id = "test-db-password"
-description = "Detect fake DB password"
-regex = '''SuperSecurePassword123!'''
-secretGroup = 0
-entropy = 0.0
-keywords = ["DB_PASSWORD"]
-tags = ["test","password"]
-
-[[rules]]
-id = "test-github-token"
-description = "Detect fake GitHub token"
-regex = '''ghp_1234567890EXAMPLETOKEN'''
-secretGroup = 0
-entropy = 0.0
-keywords = ["GITHUB_TOKEN"]
-tags = ["test","token"]
+id = "api-key-const"
+description = "Detects hardcoded API keys defined as a constant."
+regex = '''(?i)const\s+apiKey\s*=\s*["']([A-Za-z0-9\-]{5,})["']'''
+keywords = ["apikey", "apiKey"]
