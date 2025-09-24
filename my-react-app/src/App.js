@@ -2,7 +2,6 @@ import React from 'react';
 
 function App() {
   // Secret examples for testing
-  // const apiKey = "REMOVED";
 
   return (
     <div style={{ padding: '20px' }}>
