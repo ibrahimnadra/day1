@@ -2,7 +2,6 @@ import React from 'react';
 
 function App() {
   // Secret examples for testing
-  // const apiKey = "12345-FAKE-SECRET-KEY";
 
   return (
     <div style={{ padding: '20px' }}>
