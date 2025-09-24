@@ -35,7 +35,7 @@ jobs:
 
       # Stage 3: Security (Gitleaks) + Report
       - name: Run Gitleaks
-        uses: zricethezav/gitleaks-action@v2
+        uses: zricethezav/gitleaks:latest
         with:
           args: detect --source=. --report-path=gitleaks-report.json --exit-on-find
 
@@ -44,6 +44,8 @@ jobs:
         with:
           name: gitleaks-report
           path: gitleaks-report.json
+        
+        
 
       # Stage 4: Deploy Docker
       - name: Build Docker Image
