@@ -43,6 +43,7 @@ Demonstrate understanding of shift-left security principles by scanning code for
   git filter-repo --replace-text <(echo "XXX==>XXX")
   ```
 - Committed and pushed the changes to GitHub.
+  ![Ran Git Filter](screenshots/run_git_filter.png)
 
 ### 4. Re-run Gitleaks
 - Re-scanned the repository to ensure no further secrets were detected.
