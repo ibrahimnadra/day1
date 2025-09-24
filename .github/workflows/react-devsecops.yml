@@ -35,7 +35,7 @@ jobs:
 
       # Stage 3: Security (Gitleaks) + Report
       - name: Run Gitleaks
-        uses: zricethezav/gitleaks:latest
+        uses: zricethezav/gitleaks@latest
         with:
           args: detect --source=. --report-path=gitleaks-report.json --exit-on-find
 
