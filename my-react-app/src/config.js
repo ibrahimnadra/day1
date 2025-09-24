@@ -1,0 +1,1 @@
+export const API_KEY = "FAKE_API_KEY_123456";
