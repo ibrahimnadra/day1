@@ -8,25 +8,41 @@ Demonstrate understanding of shift-left security principles by scanning code for
 ## Tasks Completed
 
 ### 1. Use a Sample Code
-- A simple React application (`my-react-app`) was used as the sample codebase, which is exposing a secrets: apiKey in App.js.
+- A simple React application (`my-react-app`) was used as the sample codebase, which is exposing a secret: apiKey in App.js.
 
-### 2. Set up Gitleaks locally
+### 2. Created the ruleset for Gitleaks
+- Created a custom `gitleaks.toml` configuration file to define patterns for detecting secret: apiKey.
+
+### 3. Set up Gitleaks locally
 - Pulled the image from dockerhub: `docker pull zricethezav/gitleaks:latest`.
-- Added and Committed the my-react-app code with secrets to a new GitHub repository.
+- Added and Committed the day1 folder to a new GitHub repository.
 - Ran Gitleaks locally using:
   ```bash
   docker run --rm -v $(pwd)/.gitleaks.toml:/gitleaks.toml -v $(pwd):/code zricethezav/gitleaks:latest
   ```
 - Verified that Gitleaks detected the hardcoded secrets.
+  ![Gitleak Run on Local](screenshots/local_gitleak_run.png)
 
-### 2. Set up Gitleaks in a Pipeline
+### 4. Set up Gitleaks in a Pipeline
 - Added a GitHub Actions workflow under `.github/workflows/react-devsecops.yml`.
 - Integrated **Gitleaks** (`zricethezav/gitleaks-action@v2`) to scan the repo for hardcoded secrets.
 - Configured it to generate a report (`gitleaks-report.json`) and upload it as an artifact.
+  ![Failed Gitleak Run On Pipeline](screenshots/failed_pipeline_gitleak_run.png)
+
+### 5. Install `git-filter-repo`
+- Installed using apt package manager:
+  ```bash
+  sudo apt install git-filter-repo
+  ```
+  ![Install Git Filter Repo](screenshots/install_git_filter_repo.png)
 
 ### 3. Identify and Remove Detected Secrets
-- Introduced test secrets locally and confirmed Gitleaks was able to detect them.
-- Removed the secrets from the repository history.
+- Removed the secret from the codebase (App.js).
+- Removed the secret from the Git history using:
+  ```bash
+  git filter-repo --replace-text <(echo "XXX==>XXX")
+  ```
+- Committed and pushed the changes to GitHub.
 
 ### 4. Re-run Gitleaks
 - Re-scanned the repository to ensure no further secrets were detected.
