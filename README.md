@@ -18,7 +18,7 @@ Demonstrate understanding of shift-left security principles by scanning code for
 - Added and Committed the day1 folder to a new GitHub repository.
 - Ran Gitleaks locally using:
   ```bash
-  docker run --rm -v $(pwd)/.gitleaks.toml:/gitleaks.toml -v $(pwd):/code zricethezav/gitleaks:latest
+  sudo docker run --rm -v $(pwd):/path zricethezav/gitleaks:latest detect   --source="/path"   --report-format=json   --report-path=/path/gitleaks-report.json
   ```
 - Verified that Gitleaks detected the hardcoded secrets.
   ![Failed Gitleak Run on Local](screenshots/failed_local_gitleak_run.png)
@@ -55,19 +55,15 @@ Demonstrate understanding of shift-left security principles by scanning code for
  ![Success Gitleak Run on Pipeline](screenshots/success_pipeline_gitleak_run.png)
 
 ### 9. Deploy Application Securely
-- Wrote a `Dockerfile` to containerize the React application.
-- Extended the GitHub Actions pipeline with four stages:
-  1. **Build**: Install dependencies and build the React app.
-  2. **Test**: Placeholder test (echo statement).
-  3. **Security**: Run Gitleaks and upload the scan report.
-  4. **Deploy**: Build and run the Docker container.
+- Deployed the React application using Docker as the final step in the GitHub Actions workflow, ensuring no secrets are hardcoded in the codebase.
 
 ---
 
-## Lessons Learned
-- Secrets can accidentally get hardcoded and pushed to source control.
-- Automated scanning tools like **Gitleaks** help shift security left by catching issues early.
-- Deployment should always avoid including sensitive values in code. Secrets must be injected securely (via env vars, secret stores, or config managers).
+## Challenges Faced
+- Did not  find the resource to install gitleaks on ubuntu, had to use docker image.
+- GitLeaks is not detecting the default secrets(like AWS_SECRET_ACCESS_KEY) have to add custom regex in toml file.
+- After i removed the secret using git filter-repo and then pushing it to remote repo, the commits mismatch from remote to local.
+- Had to fetch full depth of the repo in github action to make gitleaks work.
 
 ---
 
