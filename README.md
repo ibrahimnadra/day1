@@ -8,7 +8,7 @@ Demonstrate understanding of shift-left security principles by scanning code for
 ## Tasks Completed
 
 ### 1. Use a Sample Code
-- A simple React application (`my-react-app`) was used as the sample codebase, which is exposing two secrets: BITBUCKET_CLIENT_ID and DB_PASSWORD in App.js.
+- A simple React application (`my-react-app`) was used as the sample codebase, which is exposing a secrets: apiKey in App.js.
 
 ### 2. Set up Gitleaks locally
 - Pulled the image from dockerhub: `docker pull zricethezav/gitleaks:latest`.
