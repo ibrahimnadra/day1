@@ -20,10 +20,14 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd my-react-app
+          npm install
 
       - name: Build App
-        run: npm run build
+        run: |
+          cd my-react-app
+          npm run build
 
       # Stage 2: Test (placeholder)
       - name: Test Placeholder
@@ -41,7 +45,7 @@ jobs:
           name: gitleaks-report
           path: gitleaks-report.json
 
-      # Stage 4: Deploy
+      # Stage 4: Deploy Docker
       - name: Build Docker Image
         run: docker build -t my-react-app .
 
