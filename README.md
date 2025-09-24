@@ -50,7 +50,7 @@ Demonstrate understanding of shift-left security principles by scanning code for
 
 ### 8. Re-run Gitleaks
 - Re-scanned the repository
- ![Success Gitleak Run on Local](success_local_gitleak_run.png)
+ ![Success Gitleak Run on Local](screenshots/success_local_gitleak_run.png)
 - Re-ran the GitHub Actions pipeline to confirm no secrets are detected.
  ![Success Gitleak Run on Pipeline](screenshots/success_pipeline_gitleak_run.png)
 
